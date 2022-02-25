@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
+        <!-- pridame styly -->
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
         <!-- Pridany zbundlovanu javascript (po npm run dev)-->
         {{--  defer hovori to, ze script je natiahnuty az ked je stranka uplne naloadovana  --}}
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -17,7 +20,7 @@
     </head>
     <body>
         <div id="app">
-            <router-view></router-view>
+            <index></index>
         </div>
     </body>
 </html>
