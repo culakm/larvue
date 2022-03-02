@@ -9,7 +9,7 @@
         <router-link to="/second">Second</router-link>  -->
 
         <!-- linky su definovane na zaklade mena routy -->
-        <router-link class="navbar-brand mr-auto" v-bind:to="{name: 'homeroutename'}">Larvue</router-link> <!-- miesto v-bind:to="" staci pisat len :to="" -->
+        <router-link class="navbar-brand mr-auto" v-bind:to="{name: 'home'}">Larvue</router-link> <!-- v-bind je konvertovanie na objekt miesto v-bind:to="" staci pisat len :to="" -->
         <router-link class="btn" v-bind:to="{name: 'secondroutename'}">Second</router-link> 
 
         </nav>

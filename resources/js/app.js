@@ -7,7 +7,7 @@ import Index from "./Index.vue";
 
 window.Vue = require('vue').default;
 
-// o tychto komponentoch vie Vue cez routes
+// o tychto komponentoch vie Vue cez routes - globalna registracia
 // Vue.component(
 //     'example-component', 
 //     require('./components/ExampleComponent.vue').default
@@ -24,7 +24,7 @@ Vue.use(VueRouter);
 const app = new Vue({
     el: '#app',
     router, // znova je to skratka ako v router.js
-    components: { // Vue vie o tychto komponentoch
+    components: { // Vue vie o tychto komponentoch - lokalna registracia
         "index": Index
     }
 });
