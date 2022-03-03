@@ -5372,6 +5372,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   //props: ["itemTitle","content","price"] // bez datovych typov ako pole
   props: {
@@ -5380,8 +5383,9 @@ __webpack_require__.r(__webpack_exports__);
     "price": Number
   },
   // s datovymi typmi ako objekt
-  mounted: function mounted() {
-    console.log(this.itemTitle);
+  mounted: function mounted() {//console.log(this.itemTitle)
+    // toto nastavi title hocijakej instancie ale pokial sa zmenia reactive data tak sa to prepise 
+    //this.itemTitle = "pakovy title";
   }
 });
 
@@ -5410,29 +5414,189 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     BookableListItem: _BookableListItem__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  beforeCreate: function beforeCreate() {
-    console.log('beforeCreate time');
+  data: function data() {
+    return {
+      // zistovanie ci sa loaduje
+      loading: false,
+      // pocet stlpcov pre bootstrap
+      columns: 3,
+      // pole instancii
+      bookables: null,
+      // jednotlive instancie
+      bookable1: null,
+      bookable2: null // instancie natvrdo
+      // bookable1: {
+      //     itemTitle: "Prvy nazov reactive",
+      //     content: "prvy obsah reactive",
+      //     price: 10
+      // }
+
+    };
   },
+  // urcenie poctu riadkov v tabulke zobrazenia podla dlzky pola bookables
+  // tato computedproperty sa vzdy meni 
+  computed: {
+    rows: function rows() {
+      return this.bookables === null ? 0 : Math.ceil(this.bookables.length / this.columns);
+    }
+  },
+  // funkcie ktore mozeme volat v ramci komponentu
+  methods: {
+    bookablesInRow: function bookablesInRow(row) {
+      return this.bookables.slice((row - 1) * this.columns, row * this.columns);
+    },
+    placeholdersInRow: function placeholdersInRow(row) {
+      return this.columns - this.bookablesInRow(row).length;
+    }
+  },
+  // lifecycle method
   created: function created() {
-    console.log('created time');
-  },
-  beforeMount: function beforeMount() {
-    console.log('beforeMount time');
-  },
-  mounted: function mounted() {
-    console.log('mounted time');
-  },
-  beforeDestroy: function beforeDestroy() {
-    console.log('beforeDestroy time');
-  },
-  destroyed: function destroyed() {
-    console.log('destroyed time');
-  }
+    var _this = this;
+
+    // zacina loadovat
+    this.loading = true; // simulovanie zmeny dat ktore odchadzaju do view
+
+    setTimeout(function () {
+      _this.bookables = [{
+        itemTitle: "Prve z pola",
+        content: "prvy obsah reactive z pola",
+        price: 10
+      }, {
+        itemTitle: "Druhe z pola",
+        content: "druhy obsah reactive z pola",
+        price: 1011110
+      }, {
+        itemTitle: "Treti z pola",
+        content: "3 obsah reactive z pola",
+        price: 1011110
+      }, {
+        itemTitle: "Stvrty z pola",
+        content: "4 obsah reactive z pola",
+        price: 1011110
+      }, {
+        itemTitle: "Piaty z pola",
+        content: "5 obsah reactive z pola",
+        price: 1011110
+      }, {
+        itemTitle: "Siesty z pola",
+        content: "6 obsah reactive z pola",
+        price: 1011110
+      }, {
+        itemTitle: "Siedmy z pola",
+        content: "7 obsah reactive z pola",
+        price: 1011110
+      }];
+      _this.bookable1 = {
+        itemTitle: "Prvy nazov reactive",
+        content: "prvy obsah reactive",
+        price: 10
+      };
+      _this.bookable2 = {
+        itemTitle: "Druhy nazov reactive",
+        content: "druhy obsah reactive",
+        price: 1011110
+      }; // this.bookable1.itemTitle = "Title prveho  reactive ";
+      // this.bookable2.itemTitle = "Title  druheho reactive";
+      // Loadovanie je dokoncene 
+
+      _this.loading = false;
+    }, 1000);
+    setTimeout(function () {
+      console.log("prva zmena bude vidiet");
+      _this.bookable1.itemTitle = "Title prveho zmeneny po 5 sekundach reactive ";
+      _this.bookable1.price = +50;
+    }, 5000); // Tu sa hodnota nezmeni, instancia je nereactive
+
+    setTimeout(function () {
+      console.log("druha zmena nebude vidiet"); // this.bookable3.itemTitle = "Title zmeneny po 8 sekundach ale tento sa nezmeni lebo je nereactive ";
+    }, 8000);
+  } // lifecycle hooks 
+  // este tu chybaju beforeUpdate a updated
+  // beforeCreate() {
+  //     console.log('beforeCreate time')
+  // },
+  // created() {
+  //     console.log('created time')
+  // },
+  // beforeMount() {
+  //     console.log('beforeMount time')
+  // },
+  // mounted() {
+  //     console.log('mounted time')
+  // },
+  // beforeDestroy() {
+  //     console.log('beforeDestroy time')
+  // },
+  // destroyed() {
+  //     console.log('destroyed time')
+  // }
+  // odchytavanie dat zo servera
+
 });
 
 /***/ }),
@@ -28372,10 +28536,16 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.itemTitle))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.content))]),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h1", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.itemTitle))]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.content))]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v("price: " + _vm._s(_vm.price)),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -28404,25 +28574,83 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("bookable-list-item", {
-        attrs: {
-          "item-title": "Prvy Nazov",
-          content: "prvy obsah",
-          price: 100,
-        },
-      }),
+      _vm._v("\n    columns: " + _vm._s(_vm.columns) + "\n    "),
+      _vm._v("\n    rows: " + _vm._s(_vm.rows) + "\n\n    "),
       _vm._v(" "),
-      _c("bookable-list-item", {
-        attrs: {
-          "item-title": "Druhy Nazov",
-          content: "druhy obsah",
-          price: 258,
-        },
-      }),
+      _vm.loading
+        ? _c("div", [_vm._v("\n        Data is loading...\n    ")])
+        : _c(
+            "div",
+            [
+              _vm._l(_vm.rows, function (row) {
+                return _c(
+                  "div",
+                  { key: "row" + row, staticClass: "row mb-4" },
+                  [
+                    _vm._l(
+                      _vm.bookablesInRow(row),
+                      function (bookable, column) {
+                        return _c(
+                          "div",
+                          { key: "row" + row + column, staticClass: "col" },
+                          [
+                            _c("bookable-list-item", {
+                              attrs: {
+                                "item-title": bookable.itemTitle,
+                                content: bookable.content,
+                                price: bookable.price,
+                              },
+                            }),
+                          ],
+                          1
+                        )
+                      }
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.placeholdersInRow(row), function (p) {
+                      return _c("div", {
+                        key: "placeholder" + row + p,
+                        staticClass: "col",
+                      })
+                    }),
+                  ],
+                  2
+                )
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.bookables, function (bookable, index) {
+                return _c("bookable-list-item", {
+                  key: index,
+                  attrs: {
+                    "item-title": bookable.itemTitle,
+                    content: bookable.content,
+                    price: bookable.price,
+                  },
+                })
+              }),
+            ],
+            2
+          ),
       _vm._v(" "),
-      _c("bookable-list-item"),
+      _vm.bookable1
+        ? _c("bookable-list-item", {
+            attrs: {
+              "item-title": _vm.bookable1.itemTitle,
+              content: _vm.bookable1.content,
+              price: _vm.bookable1.price,
+            },
+          })
+        : _vm._e(),
       _vm._v(" "),
-      _c("bookable-list-item"),
+      _vm.bookable2
+        ? _c("bookable-list-item", {
+            attrs: {
+              "item-title": _vm.bookable2.itemTitle,
+              content: _vm.bookable2.content,
+              price: _vm.bookable2.price,
+            },
+          })
+        : _vm._e(),
     ],
     1
   )
