@@ -1,8 +1,6 @@
 <template>
 <!-- uz je naloadovane? -->
-    <div v-if="loading">
-        Loading ...
-    </div>
+    <div v-if="loading">Loading ...</div>
     <div v-else>
         <!-- ideme pouzivat bootstrap grid system  -->
         <div class="row">
@@ -15,9 +13,10 @@
                         <p>{{ bookable.content }}</p>
                     </div>
                 </div>
+                <review-list v-bind:bookable-id="this.$route.params.id"></review-list>
             </div>
             <div class="col-md-4 pb-4">
-                <availability></availability>
+                <availability v-bind:bookable-id="this.$route.params.id"></availability>
             </div>
         </div>
     </div>
@@ -26,10 +25,13 @@
 <script>
 // import pouzivanych komponentov, umoznuje pouzitie <availability></availability>
 import Availability from "./Availability";
+import ReviewList from "./ReviewList";
+
 export default {
     // definicia importovanych komponentov
     components: {
-        Availability
+        Availability,
+        ReviewList
     },
     data(){
         return {

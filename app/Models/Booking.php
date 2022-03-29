@@ -15,6 +15,11 @@ class Booking extends Model
         return $this->belongsTo(Bookable::class);
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
+
     // scope ktory vybere bookings ktore patria do zadaneho timerange
     public function scopeBetweenDates(Builder $query, $from, $to)
     {

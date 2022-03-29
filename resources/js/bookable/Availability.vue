@@ -19,7 +19,7 @@
           v-bind:class="{'is-invalid': this.errorFor('from')}"
         />
         <!-- vypis vetkych errorov ktore vzniknu po validacii -->
-        <div class="invalid-feedback" v-for="(error, index) in this.errorFor('from')" v-bind:key="'from' + index">{{ error }}{{ index}}</div>
+        <div class="invalid-feedback" v-for="(error, index) in this.errorFor('from')" v-bind:key="'from' + index">{{ error }}{{ index }}</div>
       </div>
       
 
@@ -53,13 +53,16 @@
 
 <script>
 export default {
+    props: {
+      bookableId: String
+    },
     data() {
         return {
             // nastavi defaultnu hodnotu na dnesny den
             // vo formulari sa to prebera cez v-model="" 
             //from: new Date().toJSON().slice(0,10).replace(/-/g,'/'), 
             //to: null,
-            from : '2022-04-01',
+            from: '2022-04-01',
             to: '2022-04-02',
             loading: false,
             status: null,
@@ -72,7 +75,11 @@ export default {
       this.errors = null;
       axios
         .get(
-          `/api/bookables/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`
+          //parameter id jepreberany z route
+          //`/api/bookables/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`
+          //parameter id je preberany z props, 
+          // toto id je definovane v Bookable.vue v ramci komponentu <availability v-bind:bookable-id="this.$route.params.id">
+          `/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`
         )
         .then(response => {
           this.status = response.status;

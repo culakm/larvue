@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Bookable extends Model
 {
     use HasFactory;
+
     protected $fillable = ['from', 'to'];
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 
     // vracia bool, false ak nasiel nejaky booking (vtedy uz je zarezervovane)

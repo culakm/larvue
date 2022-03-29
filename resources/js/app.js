@@ -4,6 +4,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import router from "./routes";
 import Index from "./Index.vue";
+import moment from "moment";
+
+// globalne registrovany komponent
+import StarRating from "./shared/components/StarRating";
 
 window.Vue = require('vue').default;
 
@@ -20,6 +24,12 @@ window.Vue = require('vue').default;
 
 // v ramci kazdeho komponentu Vue.js budeme mat pristup k $router, $route
 Vue.use(VueRouter);
+
+// registracia globalnych filtrov
+Vue.filter("fromNow", value => moment(value).fromNow());
+
+// registracia globalnych komponentov
+Vue.component("star-rating", StarRating);
 
 const app = new Vue({
     el: '#app',
