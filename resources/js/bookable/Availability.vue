@@ -19,7 +19,7 @@
           v-bind:class="{'is-invalid': this.errorFor('from')}"
         />
         <!-- vypis vetkych errorov ktore vzniknu po validacii -->
-        <div class="invalid-feedback" v-for="(error, index) in this.errorFor('from')" v-bind:key="'from' + index">{{ error }}{{ index }}</div>
+        <validation-errors v-bind:errors="errorFor('from')"></validation-errors>
       </div>
       
 
@@ -34,7 +34,8 @@
             v-on:keyup.enter="check"
             v-bind:class="{'is-invalid': this.errorFor('to')}"
         />
-        <div class="invalid-feedback" v-for="(error, index) in this.errorFor('to')" v-bind:key="'to' + index">{{ error }}</div>
+        <!-- vypis vetkych errorov ktore vzniknu po validacii -->
+        <validation-errors v-bind:errors="errorFor('to')"></validation-errors>
       </div>
     </div>
     <div class="d-grid">
@@ -52,6 +53,9 @@
 </template>
 
 <script>
+
+import { is422 } from "./../shared/utils/response";
+
 export default {
     props: {
       bookableId: String
@@ -62,8 +66,8 @@ export default {
             // vo formulari sa to prebera cez v-model="" 
             //from: new Date().toJSON().slice(0,10).replace(/-/g,'/'), 
             //to: null,
-            from: '2022-04-01',
-            to: '2022-04-02',
+            from: 'Start date',
+            to: 'End date',
             loading: false,
             status: null,
             errors: null,
@@ -85,7 +89,7 @@ export default {
           this.status = response.status;
         })
         .catch(error => {
-          if (422 === error.response.status) {
+          if (is422(error)) {
             this.errors = error.response.data.errors;
           }
           this.status = error.response.status;

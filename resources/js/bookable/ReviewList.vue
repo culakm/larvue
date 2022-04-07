@@ -10,7 +10,7 @@
                     <!-- d-flex justify-content-end da STAR RATING na pravu stranu, d-flex je nejaky kontajner -->
                     <div class="col-md-6 d-flex justify-content-end">
                         <!-- trieda fa-lg je na zmenu velkosti -->
-                        <star-rating v-bind:rating="review.rating" class="fa-lg"></star-rating>
+                        <star-rating v-bind:value="review.rating" class="fa-lg"></star-rating>
                     </div>
                 </div>
                 <div class="row">

@@ -9,6 +9,8 @@ class Review extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id', 'content', 'rating'];
+
     // pouzite uuid ako PK start
     public function getIncrementing()
     {

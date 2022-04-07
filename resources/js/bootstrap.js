@@ -1,3 +1,6 @@
+/*
+ toto je externa kniznica na pracu s objektami, collections, poliami 
+*/
 window._ = require('lodash');
 
 try {
